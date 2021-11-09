@@ -7,7 +7,7 @@ If you have that plugin, you should uninstall that plugin first, then install th
 ### To install the Masa Google Sitemaps plugin:
 
 - Uninstall Meld Google Sitemaps (if you have it installed)
-- Click on Plugins > Add Plugin in your Mura CMS administrator
+- Click on Plugins > Add Plugin in your Masa CMS administrator
 - Either
    - download the plugin from the BlueRiver GitHub repository and click Choose File
    - (or) click on Via URL and type in https://github.com/blueriver/MuraGoogleSitemaps/archive/master.zip
