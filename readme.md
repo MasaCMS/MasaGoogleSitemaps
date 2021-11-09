@@ -4,7 +4,7 @@ The Google Sitemaps Plugin generates Google-compatible sitemaps for a Mura site.
 
 If you have that plugin, you should uninstall that plugin first, then install this one. Page-level settings are similar, so you shouldn't have to do anything but update the settings (Step 4).
 
-### To install the Mura Google Sitemaps plugin:
+### To install the Masa Google Sitemaps plugin:
 
 - Uninstall Meld Google Sitemaps (if you have it installed)
 - Click on Plugins > Add Plugin in your Mura CMS administrator
