@@ -1,7 +1,7 @@
 <cfsilent>
 <!---
 
-This file is part of the BlueRiver Inc. Google Sitemaps Plugin
+This file is part of the Masa CMS Google Sitemaps Plugin
 
 Copyright 2017 BlueRiver Inc.
 Licensed under the Apache License, Version v2.0
@@ -47,7 +47,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 
 <cfsavecontent variable="local.newBody">
 	<cfoutput>
-		<script src="/plugins/MuraGoogleSitemaps/assets/js/vue.js" type="text/javascript"></script>
+		<script src="/plugins/MasaGoogleSitemaps/assets/js/vue.js" type="text/javascript"></script>
 
 			#trim(local.alerts)#
 
@@ -95,7 +95,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 	<script>
     Mura(function(m) {
       m.loader()
-        .loadcss('#rc.$.globalConfig('context')#/plugins/MuraGoogleSitemaps/assets/css/gsm.css');
+        .loadcss('#rc.$.globalConfig('context')#/plugins/MasaGoogleSitemaps/assets/css/gsm.css');
 
     });
   </script>

@@ -1,7 +1,7 @@
 <cfsilent>
 <!---
 
-This file is part of the BlueRiver Inc. Google Sitemaps Plugin
+This file is part of the Masa CMS Google Sitemaps Plugin
 
 Copyright 2017 BlueRiver Inc.
 Licensed under the Apache License, Version v2.0
@@ -13,7 +13,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 	<h2>Translations</h2>
 	<form method="post" action="?gsm=translations">
 		<cfset rc.assignedsites = rc.translations.getAssignedSites() />
-		<p>With Mura Translations installed, you can include reference links to translated pages.<p>
+		<p>With Masa Translations installed, you can include reference links to translated pages.<p>
 		<p>Include reference links to the following sites:</p>
 		<cfloop query="#rc.assignedsites#">
 			<cfif rc.assignedsites.siteid[currentrow] neq session.siteid>

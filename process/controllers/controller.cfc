@@ -1,6 +1,6 @@
 /*
 
-This file is part of the BlueRiver Inc. Google Sitemaps Plugin
+This file is part of the Masa CMS Google Sitemaps Plugin
 
 Copyright 2017 BlueRiver Inc.
 Licensed under the Apache License, Version v2.0
@@ -22,7 +22,7 @@ component persistent="false" accessors="true" output="false" extends="mura.cfobj
 	public any function before(required struct rc) {
 		if ( StructKeyExists(rc, '$') ) {
 			var $ = rc.$;
-			var plugin = $.getPlugin("MuraTranslations");
+			var plugin = $.getPlugin("MasaTranslations");
 
 			set$(rc.$);
 
@@ -39,7 +39,7 @@ component persistent="false" accessors="true" output="false" extends="mura.cfobj
 
 		rc.hasTranslationManager = false;
 
-		rc.translations = $.getPlugin("MuraTranslations");
+		rc.translations = $.getPlugin("MasaTranslations");
 
 		if(rc.translations.getPluginID() != 0)
 			rc.hasTranslationManager = true;

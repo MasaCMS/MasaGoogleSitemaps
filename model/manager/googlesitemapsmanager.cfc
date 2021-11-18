@@ -26,7 +26,7 @@
 		<cfargument name="enable" type="boolean" required="false" default="true" />
 
 		<cfset var settings = arguments.$.getBean('gsmsettings').loadBy(siteid = arguments.siteid) />
-		<cfset var pluginConfig = arguments.$.getPlugin("MuraGoogleSitemaps") />
+		<cfset var pluginConfig = arguments.$.getPlugin("MasaGoogleSitemaps") />
 		<cfset var timeOfDay			= createDateTime(2011,1,1,3,0,0) />
 
 		<cfset var processURL		= "http://#arguments.$.siteConfig('domain')##arguments.$.globalConfig().getServerPort()##arguments.$.globalConfig('context')#/plugins/#pluginConfig.getDirectory()#/?gsm=process:&site=#siteID#" />
@@ -34,7 +34,7 @@
 		<cfif arguments.enable>
 			<cfschedule
 				action="update"
-				task="Mura Google Sitemaps #arguments.$.siteConfig('domain')# - #arguments.siteID#"
+				task="Masa Google Sitemaps #arguments.$.siteConfig('domain')# - #arguments.siteID#"
 				interval="#settings.get("frequency")#"
 				url="#processURL#"
 				operation="HTTPRequest"
@@ -46,7 +46,7 @@
 		<cfelse>
 			<cfschedule
 				action="delete"
-				task="Mura Google Sitemaps #arguments.$.siteConfig('domain')# - #arguments.siteID#">
+				task="Masa Google Sitemaps #arguments.$.siteConfig('domain')# - #arguments.siteID#">
 		</cfif>
 	</cffunction>
 
@@ -58,7 +58,7 @@
 
 		<cfset var site = $.getBean('site').loadby(siteid=siteid)>
 		<cfset var gsmsettings = $.getBean('gsmsettings').loadby(siteid=siteid)>
-		<cfset var translations = $.getPlugin('MuraTranslations')>
+		<cfset var translations = $.getPlugin('MasaTranslations')>
 		<cfset var translationsid = translations.getPluginID()>
 
 		<cfset var useSiteID	= iif( structKeyExists(arguments,"siteID"),de(arguments.siteID),de(session.siteid) ) />

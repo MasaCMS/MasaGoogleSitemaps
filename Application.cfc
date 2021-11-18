@@ -1,6 +1,6 @@
 /*
 
-This file is part of the BlueRiver Inc. Google Sitemaps Plugin
+This file is part of the Masa CMS Google Sitemaps Plugin
 
 Copyright 2017 BlueRiver Inc.
 Licensed under the Apache License, Version v2.0
@@ -120,7 +120,7 @@ component persistent="false" accessors="true" output="false" extends="includes.f
 
 		local.beanFactory.addBean('fw', this);
 
-		// optionally set Mura to be the parent beanFactory
+		// optionally set Masa to be the parent beanFactory
 		local.parentBeanFactory = application.serviceFactory;
 		local.beanFactory.setParent(local.parentBeanFactory);
 

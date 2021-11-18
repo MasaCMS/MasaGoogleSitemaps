@@ -1,6 +1,6 @@
 <!---
 
-This file is part of the BlueRiver Inc. Google Sitemaps Plugin
+This file is part of the Masa CMS Google Sitemaps Plugin
 
 Copyright 2017 BlueRiver Inc.
 Licensed under the Apache License, Version v2.0
@@ -10,13 +10,13 @@ http://www.apache.org/licenses/LICENSE-2.0
 <cfinclude template="../includes/fw1config.cfm" />
 <cfoutput>
 	<plugin>
-		<name>MuraGoogleSitemaps</name>
+		<name>Masa Google Sitemaps</name>
 		<package>#variables.framework.package#</package>
 		<directoryFormat>packageOnly</directoryFormat>
 		<version>#variables.framework.packageVersion#</version>
 		<loadPriority>5</loadPriority>
-		<provider>blueriver</provider>
-		<providerURL>http://blueriver.com</providerURL>
+		<provider>We Are Orange BV</provider>
+		<providerURL>https://www.weareorange.eu/</providerURL>
 		<category>Application</category>
 
 		<!-- Event Handlers -->

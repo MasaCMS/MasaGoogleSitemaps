@@ -1,6 +1,6 @@
 /*
 
-This file is part of the BlueRiver Inc. Google Sitemaps Plugin
+This file is part of the Masa CMS Google Sitemaps Plugin
 
 Copyright 2017 BlueRiver Inc.
 Licensed under the Apache License, Version v2.0
@@ -12,8 +12,8 @@ component persistent="false" accessors="true" output="false" extends="mura.plugi
 	// framework variables
 	include 'fw1config.cfm';
 
-	// ========================== Mura CMS Specific Methods ==============================
-	// Add any other Mura CMS Specific methods you need here.
+	// ========================== Masa CMS Specific Methods ==============================
+	// Add any other Masa CMS Specific methods you need here.
 
 	public void function onApplicationLoad(required struct $) {
 		// trigger FW/1 to reload
@@ -21,7 +21,7 @@ component persistent="false" accessors="true" output="false" extends="mura.plugi
 			getApplication().setupApplicationWrapper(); // this ensures the appCache is cleared as well
 		};
 
-		// register this file as a Mura eventHandler
+		// register this file as a Masa eventHandler
 		variables.pluginConfig.addEventHandler(this);
 	}
 
