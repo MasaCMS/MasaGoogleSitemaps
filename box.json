@@ -1,0 +1,63 @@
+{
+    "author":"We Are Orange BV",
+    "organization": "MasaCMS",
+    "bugs":"https://github.com/MasaCMS/MasaGoogleSitemaps/issues",
+    "changelog":"",
+    "contributors":[],
+    "defaultEngine": "lucee",
+    "dependencies":{},
+    "description":"The Google Sitemaps Plugin generates Google-compatible sitemaps for a Masa CMS site. Sitemaps are xml documents that the Google site crawler will use to properly and efficiently document your website. You can find details on Google Sitemaps on their website. This plugin replaces the Meld Google Sitemaps plugin, which is now deprecated.",
+    "devDependencies":{},
+    "directory": "plugins",
+    "documentation":"",
+    "engines": [
+        {
+            "type": "lucee",
+            "version": ">=5.x"
+        },
+        {
+            "type": "adobe",
+            "version": ">=11.0.0"
+        }
+    ],
+    "homepage":"https://github.com/MasaCMS/MasaGoogleSitemaps",
+    "ignore":[
+        "**/.*",
+        "/test/",
+        "/tests/"
+    ],
+    "installPaths":{},
+    "instructions":"",
+    "keywords": [
+        "mura",
+        "masa",
+        "cms",
+        "cfml",
+        "content management system",
+        "content",
+        "management",
+        "system",
+        "plugin",
+        "Google",
+        "Sitemaps"
+    ],
+    "license":[
+        {
+            "type":"Apache License 2.0",
+            "URL":"https://github.com/MasaCMS/MasaGoogleSitemaps/blob/main/license.txt"
+        }
+    ],
+    "location":"https://github.com/MasaCMS/MasaGoogleSitemaps/archive/refs/heads/4.3.0.zip",
+    "name":"Masa CMS Google Sitemaps Plugin",
+    "private":false,
+    "projectURL":"",
+    "repository":{
+        "type":"Git",
+        "URL":"https://github.com/MasaCMS/MasaGoogleSitemaps.git"
+    },
+    "scripts":{},
+    "shortDescription":"The Google Sitemaps Plugin generates Google-compatible sitemaps for a Masa CMS site.",
+    "slug":"MasaGoogleSitemaps",
+    "type":"modules",
+    "version":"4.3.0"
+}
