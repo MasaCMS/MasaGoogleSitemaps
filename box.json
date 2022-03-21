@@ -58,6 +58,6 @@
     "scripts":{},
     "shortDescription":"The Google Sitemaps Plugin generates Google-compatible sitemaps for a Masa CMS site.",
     "slug":"MasaGoogleSitemaps",
-    "type":"modules",
+    "type":"plugins",
     "version":"4.3.0"
 }
