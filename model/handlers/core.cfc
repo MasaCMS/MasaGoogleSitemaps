@@ -88,26 +88,18 @@ component extends="mura.plugin.pluginGenericEventHandler" {
 		// Convert to array
 		var arSchedules = QueryColumnData(rsSchedules,'task');
 
-		dump(arSchedules);
-
-		for(var currentSiteId in local.allSites){
-
-			var gsmsettings = arguments.$.getBean('gsmsettings').loadBy(siteid = currentSiteId);
-
+		for(var currentSiteID in allSites){
+			var gsmsettings = arguments.$.getBean('gsmsettings').loadBy(siteid = currentSiteID);
 			if(gsmsettings.getIsEnabled()){
-				var currentDomain = arguments.$.getBean('settingsManager').getSite(currentSiteId).get('domain');
-				var scheduleTaskName = "Masa Google Sitemaps #currentDomain# - #currentSiteId#";
-				dump(scheduleTaskName);
-
-				// Taks is enabled, but doenst exist
+				var currentDomain = arguments.$.getBean('settingsManager').getSite(currentSiteID).get('domain');
+				var scheduleTaskName = "Masa Google Sitemaps #currentDomain# - #currentSiteID#";
+				// Task is enabled, but doesnt exist
 				if(!arSchedules.find(scheduleTaskName)){
-					dump('create a new task');
+					// Create the task
+					arguments.$.getBean('GoogleSitemapsManager').schedule(arguments.$, currentSiteID, true);
 				}
 			}
 		}
-
-		// remove me!
-		abort;
 
 		arguments.$.announceEvent('GSMApplicationLoad');
 
