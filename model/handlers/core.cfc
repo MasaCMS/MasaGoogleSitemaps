@@ -95,8 +95,8 @@ component extends="mura.plugin.pluginGenericEventHandler" {
 				var scheduleTaskName = "Masa Google Sitemaps #currentDomain# - #currentSiteID#";
 				// Task is enabled, but doesnt exist
 				if(!arSchedules.find(scheduleTaskName)){
-					// Create the task
-					arguments.$.getBean('GoogleSitemapsManager').schedule(arguments.$, currentSiteID, true);
+					// Create the task and run it
+					arguments.$.getBean('GoogleSitemapsManager').schedule($=arguments.$, siteID=currentSiteID, enable=true, run=true);
 				}
 			}
 		}
