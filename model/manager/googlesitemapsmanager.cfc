@@ -27,14 +27,15 @@
 
 		<cfset var settings = arguments.$.getBean('gsmsettings').loadBy(siteid = arguments.siteid) />
 		<cfset var pluginConfig = arguments.$.getPlugin("MasaGoogleSitemaps") />
-		<cfset var timeOfDay			= createDateTime(2011,1,1,3,0,0) />
+		<cfset var timeOfDay = createDateTime(2011,1,1,3,0,0) />
+		<cfset var currentDomain = arguments.$.getBean('settingsManager').getSite(arguments.siteID).get('domain')>
 
-		<cfset var processURL		= "http://#arguments.$.siteConfig('domain')##arguments.$.globalConfig().getServerPort()##arguments.$.globalConfig('context')#/plugins/#pluginConfig.getDirectory()#/?gsm=process:&site=#siteID#" />
+		<cfset var processURL = "http://#currentDomain##arguments.$.globalConfig().getServerPort()##arguments.$.globalConfig('context')#/plugins/#pluginConfig.getDirectory()#/?gsm=process:&site=#siteID#" />
 
 		<cfif arguments.enable>
 			<cfschedule
 				action="update"
-				task="Masa Google Sitemaps #arguments.$.siteConfig('domain')# - #arguments.siteID#"
+				task="Masa Google Sitemaps #currentDomain# - #arguments.siteID#"
 				interval="#settings.get("frequency")#"
 				url="#processURL#"
 				operation="HTTPRequest"
@@ -46,7 +47,7 @@
 		<cfelse>
 			<cfschedule
 				action="delete"
-				task="Masa Google Sitemaps #arguments.$.siteConfig('domain')# - #arguments.siteID#">
+				task="Masa Google Sitemaps #currentDomain# - #arguments.siteID#">
 		</cfif>
 	</cffunction>
 
