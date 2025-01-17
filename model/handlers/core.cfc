@@ -78,6 +78,37 @@ component extends="mura.plugin.pluginGenericEventHandler" {
 		}
 		validateSession();
 
+		// Check for every site when the Task is enabled, that the Task actually exists
+		// We need to check this, beacause deploying a new cloud container instance the task is lost
+
+		// Get all the sites
+		var allSites = arguments.$.getBean('settingsManager').getSites();
+		// Get all the scheduled tasks
+		schedule action="list" returnvariable="rsSchedules";
+		// Convert to array
+		var arSchedules = QueryColumnData(rsSchedules,'task');
+
+		dump(arSchedules);
+
+		for(var currentSiteId in local.allSites){
+
+			var gsmsettings = arguments.$.getBean('gsmsettings').loadBy(siteid = currentSiteId);
+
+			if(gsmsettings.getIsEnabled()){
+				var currentDomain = arguments.$.getBean('settingsManager').getSite(currentSiteId).get('domain');
+				var scheduleTaskName = "Masa Google Sitemaps #currentDomain# - #currentSiteId#";
+				dump(scheduleTaskName);
+
+				// Taks is enabled, but doenst exist
+				if(!arSchedules.find(scheduleTaskName)){
+					dump('create a new task');
+				}
+			}
+		}
+
+		// remove me!
+		abort;
+
 		arguments.$.announceEvent('GSMApplicationLoad');
 
 	}
