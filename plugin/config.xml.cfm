@@ -15,8 +15,8 @@ http://www.apache.org/licenses/LICENSE-2.0
 		<directoryFormat>packageOnly</directoryFormat>
 		<version>#variables.framework.packageVersion#</version>
 		<loadPriority>5</loadPriority>
-		<provider>We Are Orange BV</provider>
-		<providerURL>https://www.weareorange.eu/</providerURL>
+		<provider>We Are North Groep BV</provider>
+		<providerURL>https://www.wearenorth.eu/</providerURL>
 		<category>Application</category>
 
 		<!-- Event Handlers -->

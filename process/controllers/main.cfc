@@ -12,7 +12,6 @@ component persistent="false" accessors="true" output="false" extends="controller
 	// *********************************  PAGES  *******************************************
 
 	public any function default(required rc) {
-		// rc.varName = 'whatever';
 
 		var siteid					= structKeyExists(url,"site") ? url.site : session.siteid;
 		var siteConfig			= rc.$.getBean('settingsManager').getSite(siteid);
@@ -28,14 +27,23 @@ component persistent="false" accessors="true" output="false" extends="controller
 
 		rc.gsmsettings.save();
 
-
 		if(rc.gsmsettings.getValue('location') eq "web") {
 			filename = "#expandPath(application.configBean.getContext() & '/')#sitemap.xml";
 			rc.fileURL	= "http://#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/sitemap.xml";
 		}
-		else {
-			filename ="#expandPath(application.configBean.getContext() & '/')##siteid#/sitemap.xml";
-			rc.fileURL	= "http://#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/#siteid#/sitemap.xml";
+		else if(rc.gsmsettings.getValue('location') eq "custom"){
+			filename=expandPath("#rc.gsmsettings.getValue('customlocation')#/sitemap.xml");
+			rc.fileURL	= "http://#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/#rc.gsmsettings.getValue('customlocation')#/sitemap.xml";
+		} else {
+			if(directoryExists(sitesFolder)) {
+				// 'new' folder structure with sites in sites folder
+				filename ="#expandPath(application.configBean.getContext() & '/')#sites/#siteid#/sitemap.xml";
+				rc.fileURL	= "http://#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/sites/#siteid#/sitemap.xml";
+			} else {
+				// 'old' folder structure with sites directly in the webroot
+				filename ="#expandPath(application.configBean.getContext() & '/')##siteid#/sitemap.xml";
+				rc.fileURL	= "http://#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/#siteid#/sitemap.xml";
+			}
 		}
 		try {
 			fileWrite(filename,sitemapXML);
