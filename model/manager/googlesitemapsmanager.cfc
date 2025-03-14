@@ -208,7 +208,7 @@
 
 			<cfif len(gsmsettings.getSiteList())>
 				<cfquery name="qTrans" datasource="#$.GlobalConfig().get('datasource')#" username="#$.GlobalConfig().get('dbusername')#" password="#$.GlobalConfig().get('dbpassword')#">
-						SELECT
+						SELECT DISTINCT
 							remoteid,remotesiteid
 						FROM
 							p#translationsid#_translationmaps
@@ -216,7 +216,7 @@
 							p#translationsid#_translationmaps.localid =
 							<cfqueryparam value="#contentid#" cfsqltype="CF_SQL_VARCHAR" maxlength="35">
 						AND
-							p#translationsid#_translationmaps.remotesiteid IN
+							p#translationsid#_translationmaps.localsiteid IN
 							(<cfqueryparam value="#gsmsettings.getSiteList()#" cfsqltype="CF_SQL_VARCHAR" maxlength="250" list="true">)
 				</cfquery>
 
@@ -231,7 +231,7 @@
 						</cfif>
 
 	<cfsavecontent variable="langoutput"><cfoutput>#langoutput#
-		<xhtml:link rel="alternate" hreflang = "#sites[remotesiteid].getJavaLocale()#" href="#langcontent.getAssocURL()#" /></cfoutput></cfsavecontent>
+		<xhtml:link rel="alternate" hreflang = "#replace(sites[remotesiteid].getJavaLocale(), "_", "-")#" href="#langcontent.getAssocURL()#" /></cfoutput></cfsavecontent>
 					</cfloop>
 				</cfif>
 			</cfif>
