@@ -13,51 +13,40 @@ component persistent="false" accessors="true" output="false" extends="controller
 
 	public any function default(required rc) {
 
-		var siteid					= structKeyExists(url,"site") ? url.site : session.siteid;
+		var siteid				= rc.siteid;
 		var siteConfig			= rc.$.getBean('settingsManager').getSite(siteid);
+		var siteProtocol		= siteConfig.get('useSSL') ? 'https://' : 'http://';
 		var mailer				= rc.$.getBean("mailer");
 		var tickCount			= getTickCount();
 		var msg					= "";
-		var fileName				= "";
+		var fileName			= "";
 		var sitemapManager		= $.getBean('GoogleSitemapsManager');
 		var sitemapXML			= sitemapManager.getSitemap(rc.$,siteid);
 
-
 		rc.gsmsettings.setValue('datelastgenerate',now());
-
 		rc.gsmsettings.save();
 
 		if(rc.gsmsettings.getValue('location') eq "web") {
-			filename = "#expandPath(application.configBean.getContext() & '/')#sitemap.xml";
-			rc.fileURL	= "http://#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/sitemap.xml";
+			filename = expandPath('/murawrm/sitemap.xml');
+			rc.fileURL	= siteProtocol & "#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/sitemap.xml";
 		}
 		else if(rc.gsmsettings.getValue('location') eq "custom"){
 			filename=expandPath("#rc.gsmsettings.getValue('customlocation')#/sitemap.xml");
-			rc.fileURL	= "http://#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/#rc.gsmsettings.getValue('customlocation')#/sitemap.xml";
+			rc.fileURL	= "";
 		} else {
-			if(directoryExists(sitesFolder)) {
-				// 'new' folder structure with sites in sites folder
-				filename ="#expandPath(application.configBean.getContext() & '/')#sites/#siteid#/sitemap.xml";
-				rc.fileURL	= "http://#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/sites/#siteid#/sitemap.xml";
-			} else {
+			if(directoryExists(expandPath('/murawrm/#siteid#'))) {
 				// 'old' folder structure with sites directly in the webroot
-				filename ="#expandPath(application.configBean.getContext() & '/')##siteid#/sitemap.xml";
-				rc.fileURL	= "http://#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/#siteid#/sitemap.xml";
-			}
-		}
-		try {
-			fileWrite(filename,sitemapXML);
-		}
-		catch(any e) {
-			writeDump(e);abort;
-			if(rc.gsmsettings.getValue('location') eq "web") {
-				filename = expandPath("../../sitemap.xml");
+				filename =expandPath('/murawrm/#siteid#/sitemap.xml');
+				rc.fileURL	= siteProtocol & "#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/#siteid#/sitemap.xml";
 			}
 			else {
-				filename = expandPath("../../#siteid#/sitemap.xml");
+				// 'new' folder structure with sites in sites folder
+				filename=expandPath('/murawrm/sites/#siteid#/sitemap.xml');
+				rc.fileURL	= siteProtocol & "#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/sites/#siteid#/sitemap.xml";
 			}
-			fileWrite(filename,sitemapXML);
 		}
+
+		fileWrite(filename,sitemapXML);
 
 		if( len( rc.gsmsettings.getValue('notifyemail') ) )  {
 
