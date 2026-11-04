@@ -83,10 +83,23 @@ component extends="mura.plugin.pluginGenericEventHandler" {
 
 		// Get all the sites
 		var allSites = arguments.$.getBean('settingsManager').getSites();
-		// Get all the scheduled tasks
-		schedule action="list" returnvariable="rsSchedules";
+		// Get all the scheduled tasks; function-style cfschedule() works on both Lucee and ACF.
+		// ACF without the 'scheduler' package throws here, which must not break the app reload.
+		var rsSchedules = "";
+		try {
+			cfschedule(action="list", result="rsSchedules");
+		}
+		catch(any e) {
+			writeLog(type="warning", text="MasaGoogleSitemaps: could not list scheduled tasks, skipping task check: #e.message#");
+			allSites = {};
+		}
 		// Convert to array
-		var arSchedules = QueryColumnData(rsSchedules,'task');
+		var arSchedules = [];
+		if(isQuery(rsSchedules)) {
+			for(var schedule in rsSchedules) {
+				arSchedules.append(schedule.task);
+			}
+		}
 
 		for(var currentSiteID in allSites){
 			var gsmsettings = arguments.$.getBean('gsmsettings').loadBy(siteid = currentSiteID);
