@@ -31,10 +31,13 @@ component persistent="false" accessors="true" output="false" extends="mura.cfobj
 			);
 
 		}
-		rc.gsmsettings = $.getBean('gsmsettings').loadBy(siteid = session.siteid);
+		// The scheduled task passes the site as ?site=; its session always starts on 'default'
+		rc.siteid = structKeyExists(rc, 'site') ? rc.site : session.siteid;
+
+		rc.gsmsettings = $.getBean('gsmsettings').loadBy(siteid = rc.siteid);
 		if(rc.gsmsettings.getIsNew()) {
 			rc.gsmsettings.save();
-			rc.gsmsettings = $.getBean('gsmsettings').loadBy(siteid = session.siteid);
+			rc.gsmsettings = $.getBean('gsmsettings').loadBy(siteid = rc.siteid);
 		}
 
 		rc.hasTranslationManager = false;
