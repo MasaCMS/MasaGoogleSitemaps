@@ -45,33 +45,12 @@ component persistent="false" accessors="true" output="false" extends="controller
 			filename=expandPath("#rc.gsmsettings.getValue('customlocation')#/sitemap.xml");
 			rc.fileURL	= "";
 		} else {
-			if(directoryExists(expandPath('/murawrm/#siteid#'))) {
-				filename =expandPath('/murawrm/#siteid#/sitemap.xml');
-				rc.fileURL	= siteProtocol & "#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/#siteid#/sitemap.xml";
-			}
-			else {
-				filename=expandPath('/murawrm/sites/#siteid#/sitemap.xml');
-				rc.fileURL	= siteProtocol & "#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/sites/#siteid#/sitemap.xml";
-			}
+			// Core decides whether sites live in /sites or directly in the webroot
+			filename = rc.$.globalConfig().getSiteDir() & "/#siteid#/sitemap.xml";
+			rc.fileURL	= siteProtocol & "#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()##rc.$.globalConfig().getSiteAssetPath()#/#siteid#/sitemap.xml";
 		}
 
-		try {
-			fileWrite(filename,sitemapXML);
-		}
-		catch(any e) {
-			if(rc.gsmsettings.getValue('location') eq "web") {
-				filename = expandPath("/murawrm/sitemap.xml");
-			}
-			else {
-				if(directoryExists(expandPath("/murawrm/#siteid#/"))) {
-					filename = expandPath("/murawrm/#siteid#/sitemap.xml");
-				}
-				else {
-					filename = expandPath("/murawrm/sites/#siteid#/sitemap.xml");
-				}
-			}
-			fileWrite(filename,sitemapXML);
-		}
+		fileWrite(filename,sitemapXML);
 
 		rc.time = (getTickCount()-tickCount);
 	}

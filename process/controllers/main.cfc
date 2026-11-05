@@ -34,16 +34,9 @@ component persistent="false" accessors="true" output="false" extends="controller
 			filename=expandPath("#rc.gsmsettings.getValue('customlocation')#/sitemap.xml");
 			rc.fileURL	= "";
 		} else {
-			if(directoryExists(expandPath('/murawrm/#siteid#'))) {
-				// 'old' folder structure with sites directly in the webroot
-				filename =expandPath('/murawrm/#siteid#/sitemap.xml');
-				rc.fileURL	= siteProtocol & "#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/#siteid#/sitemap.xml";
-			}
-			else {
-				// 'new' folder structure with sites in sites folder
-				filename=expandPath('/murawrm/sites/#siteid#/sitemap.xml');
-				rc.fileURL	= siteProtocol & "#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()#/sites/#siteid#/sitemap.xml";
-			}
+			// Core decides whether sites live in /sites or directly in the webroot
+			filename = rc.$.globalConfig().getSiteDir() & "/#siteid#/sitemap.xml";
+			rc.fileURL	= siteProtocol & "#siteConfig.getDomain()##rc.$.globalConfig().getServerPort()##rc.$.globalConfig().getContext()##rc.$.globalConfig().getSiteAssetPath()#/#siteid#/sitemap.xml";
 		}
 
 		fileWrite(filename,sitemapXML);
