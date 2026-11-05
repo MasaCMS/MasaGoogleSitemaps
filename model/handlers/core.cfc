@@ -96,8 +96,8 @@ component extends="mura.plugin.pluginGenericEventHandler" {
 		// Convert to array
 		var arSchedules = [];
 		if(isQuery(rsSchedules)) {
-			for(var schedule in rsSchedules) {
-				arSchedules.append(schedule.task);
+			for(var scheduledTask in rsSchedules) {
+				arSchedules.append(scheduledTask.task);
 			}
 		}
 

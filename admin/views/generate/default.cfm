@@ -17,7 +17,9 @@ http://www.apache.org/licenses/LICENSE-2.0
 			<div class="mura-control-group">
 				<cfif structKeyExists(rc,"time")>
 					<p>Processing Time: #rc.time# ms</p>
-					<p>Location: <a target="new" href="#rc.fileURL#">#rc.fileURL#</a></p>
+					<cfif len(rc.fileURL)>
+						<p>Location: <a target="new" href="#rc.fileURL#">#rc.fileURL#</a></p>
+					</cfif>
 				</cfif>
 			</div>
 
